@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Users {
 
 
     @Id
@@ -26,6 +26,7 @@ public class User {
 
     private String dob;
 
+    @Column(nullable = false)
     private String phoneNumber;
 
     private String email;
