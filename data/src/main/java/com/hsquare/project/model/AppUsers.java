@@ -5,6 +5,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Scanner;
 
 @Entity
 @Getter
@@ -12,7 +14,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Users {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,9 +43,24 @@ public class Users {
 
     private String occupation;
 
+    @OneToMany(mappedBy = "users")
+    @JoinColumn(name = "records_id")
+    private List<Record> records;
+
+
+    @OneToMany(mappedBy = "users")
+    @JoinColumn(name = "vital_signs_id")
+    private List<VitalSigns> vitalSigns;
+
     @CreationTimestamp
     private LocalDateTime dateCreated;
 
 
 
+
 }
+
+
+
+
+

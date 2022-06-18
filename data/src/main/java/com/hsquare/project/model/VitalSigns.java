@@ -1,5 +1,4 @@
 package com.hsquare.project.model;
 
-public class Records {
-
+public class VitalScience {
 }
