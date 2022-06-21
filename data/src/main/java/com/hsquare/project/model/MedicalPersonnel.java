@@ -1,9 +1,11 @@
 package com.hsquare.project.model;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.List;
 
 public class MedicalPersonnel {
-
-    List<PractitionerType> personnel;
+    @Enumerated(EnumType.STRING)
+    PractitionerType personnel;
 
 }

@@ -1,16 +1,19 @@
 package com.hsquare.project;
 
-import com.hsquare.project.model.Users;
+import com.hsquare.project.model.AppUsers;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<Users, Long> {
+@Repository
+public interface UserRepository extends JpaRepository<AppUsers, Long> {
 
-    Optional<Users> findById(Long Id);
+    Optional<AppUsers> findById(Long Id);
 
-    Optional<Users> findByPhoneNumber(String phoneNumber);
+    Optional<AppUsers> findByPhoneNumber(String phoneNumber);
 
-
+    Boolean existsByPhoneNumber(String phoneNumber);
+    Boolean existsByEmail(String email);
 
 }

@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Record {
+public class MedicalRecord {
 
     @Id
     private Long id;
@@ -18,7 +18,7 @@ public class Record {
 
     private String diagnosis;
 
-    private String treatment;
+    private String prescription;
 
     @ManyToOne(optional = false)
     private AppUsers appUsers;

@@ -1,4 +1,4 @@
-package com.hsquare.project.securityservice.services;
+package com.hsquare.project.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hsquare.project.model.AppUsers;

@@ -3,14 +3,11 @@ package com.hsquare.project.users;
 import com.hsquare.project.UserRepository;
 import com.hsquare.project.exceptions.BusinessLogicException;
 import com.hsquare.project.exceptions.UserAlreadyExistException;
-import com.hsquare.project.exceptions.UserNotFoundException;
-import com.hsquare.project.model.Users;
+import com.hsquare.project.model.AppUsers;
 import com.hsquare.project.request.UserRequestDto;
 import com.hsquare.project.response.UserResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +16,7 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class UserServiceImpl implements UserService{
+public class AppUserServiceImpl implements AppUserService {
 
     @Autowired
     UserRepository userRepository;
@@ -27,13 +24,13 @@ public class UserServiceImpl implements UserService{
     private static BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public List<Users> getUsers() {
+    public List<AppUsers> getAllUsers() {
         log.info("Fetching all users");
         return userRepository.findAll();
     }
 
     @Override
-    public Optional<Users> getUser(Long uniqueID) {
+    public Optional<AppUsers> getUser(Long uniqueID) {
         log.info("Fetching user {}", uniqueID);
         return userRepository.findById(uniqueID);
     }
@@ -52,7 +49,7 @@ public class UserServiceImpl implements UserService{
         userRequestDto.setPassword(encodedPassword);
 
         //saving the user in the repository
-        Users newUser = new Users();
+        AppUsers newUser = new AppUsers();
         newUser.setFirstName(userRequestDto.getFirstName());
         newUser.setLastName(userRequestDto.getLastName());
         newUser.setGender(userRequestDto.getGender());
@@ -63,7 +60,7 @@ public class UserServiceImpl implements UserService{
 
         return buildResponse(newUser);
     }
-    private UserResponseDto buildResponse(Users appUser){
+    private UserResponseDto buildResponse(AppUsers appUser){
         return UserResponseDto.builder()
                 .firstName(appUser.getFirstName())
                 .phoneNumber(appUser.getPhoneNumber())
@@ -73,16 +70,14 @@ public class UserServiceImpl implements UserService{
     }
 
 
-
-
     @Override
-    public Users saveUser(Users users) {
+    public AppUsers saveUser(AppUsers appUsers) {
         return null;
     }
 
     @Override
     public Boolean deleteUser(Long id) throws BusinessLogicException {
-        Optional<Users> user = userRepository.findById(id);
+        Optional<AppUsers> user = userRepository.findById(id);
         if (user.isPresent()){
             userRepository.delete(user.get());
             return true;
